@@ -44,9 +44,9 @@ class ContactService {
         const filter = {
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         };
-        const update = this .getUpdatePayload(payload);
+        const update = this.extractContactData(payload);
         const result = await this.Contact.findOneAndUpdate(filter, { $set: update }, { returnDocument: "after" });
-        return result.value;
+        return result;
     }
     async delete(id) {
         const result = await this.Contact.findOneAndDelete({
